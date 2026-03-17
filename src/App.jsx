@@ -23,7 +23,27 @@ function App() {
     const website = newWebsite.trim();
 
     if(name && email && website){
-      
+      fetch("https://jsonplaceholder.typicode.com/users" ,
+      {
+         method : "POST",
+         body : JSON.stringify({
+          name,
+          email,
+          website
+         }),
+         headers : {
+           
+
+           "Content-Type": "application/json; charset=UTF-8"
+         }
+      }).then( (response) => response.json() )
+      .then(data => {
+        setUsers([...users, data])
+        alert("User added")
+      })
+      setNewEmail("");
+      setNewName("");
+      setNewWebsite("");
     }
   }
 
